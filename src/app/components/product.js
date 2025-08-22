@@ -1,13 +1,15 @@
 "use client";
+import { useState } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
-
+import LoginModal from "../components/LoginModal";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 export default function Product() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const products = [
         { id: 1, name: "Product 1", img: "https://picsum.photos/300/200?random=1" },
         { id: 2, name: "Product 2", img: "https://picsum.photos/300/200?random=2" },
@@ -34,10 +36,15 @@ export default function Product() {
                 // navigation={true}
                 modules={[Autoplay, Pagination, Navigation]}
                 className="mySwiper"
+                breakpoints={{
+                    320: { slidesPerView: 1, spaceBetween: 10 },   // small phones
+                    640: { slidesPerView: 2, spaceBetween: 15 },   // tablets
+                    1024: { slidesPerView: 3, spaceBetween: 20 },  // desktops
+                }}
             >
                 {products.map((item) => (
                     <SwiperSlide key={item.id}>
-                        <div className="bg-white shadow-lg rounded-2xl p-4 flex flex-col items-center">
+                        <div className="bg-white  rounded-2xl p-4 flex flex-col items-center">
                             <Image
                                 src={item.img}
                                 alt={item.name}
@@ -46,13 +53,19 @@ export default function Product() {
                                 className="rounded-xl"
                             />
                             <h3 className="mt-3 text-lg font-semibold">{item.name}</h3>
-                            <button className="mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg">
+                            <button onClick={() => setIsModalOpen(true)} className="mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg cursor-pointer">
                                 Buy Now
                             </button>
+
+
                         </div>
                     </SwiperSlide>
                 ))}
             </Swiper>
+            <LoginModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+            />
         </div>
     );
 }

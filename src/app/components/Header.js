@@ -4,12 +4,14 @@ import Link from "next/link";
 import { ShoppingCart, Moon, Sun } from "lucide-react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import LoginModal from "../components/LoginModal";
 
 export default function Header() {
     const [isOpen, setIsOpen] = useState(false);
     const [theme, setTheme] = useState("light");
     const [isCartOpen, setIsCartOpen] = useState(false);
     const pathname = usePathname();
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const links = [
         { href: "/", label: "Home" },
@@ -91,12 +93,17 @@ export default function Header() {
                             </span>
                         </Link>
                         {/* Login */}
-                        <Link
-                            href="/login"
-                            className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-white font-medium"
+                        <button
+                            onClick={() => setIsModalOpen(true)}
+                            className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-white font-medium cursor-pointer"
                         >
                             Login
-                        </Link>
+                        </button>
+
+                        <LoginModal
+                            isOpen={isModalOpen}
+                            onClose={() => setIsModalOpen(false)}
+                        />
                     </div>
 
                     {/* Mobile Hamburger */}
@@ -149,7 +156,7 @@ export default function Header() {
                     //         Login
                     //     </Link>
                     // </div>
-                     <div className="md:hidden bg-gray-800 dark:bg-gray-200 px-6 pb-6 space-y-3 text-lg">
+                    <div className="md:hidden bg-gray-800 dark:bg-gray-200 px-6 pb-6 space-y-3 text-lg">
                         <Link href="/" className="block">Home</Link>
                         <Link href="/shop" className="block">Shop</Link>
                         <Link href="/about" className="block">About</Link>
