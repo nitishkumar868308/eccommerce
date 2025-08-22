@@ -2,12 +2,21 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ShoppingCart, Moon, Sun } from "lucide-react";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
     const [isOpen, setIsOpen] = useState(false);
     const [theme, setTheme] = useState("light");
     const [isCartOpen, setIsCartOpen] = useState(false);
+    const pathname = usePathname();
 
+    const links = [
+        { href: "/", label: "Home" },
+        { href: "/shop", label: "Shop" },
+        { href: "/about", label: "About" },
+        { href: "/contact", label: "Contact" },
+    ];
 
     // Load theme from localStorage
     useEffect(() => {
@@ -43,16 +52,33 @@ export default function Header() {
                 <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
 
                     {/* Logo */}
-                    <Link href="/" className="text-3xl font-extrabold">
-                        Cozyy Creations
+                    <Link href="/" className="relative w-26 h-22 bg-transparent">
+                        <Image
+                            src="/image/logo-new-removebg-preview.png"
+                            alt="Logo"
+                            fill
+                            className="object-contain"
+                        />
                     </Link>
+
+
+
+
 
                     {/* Desktop Nav */}
                     <nav className="hidden md:flex space-x-8 text-lg font-medium">
-                        <Link href="/">Home</Link>
-                        <Link href="/shop">Shop</Link>
-                        <Link href="/about">About</Link>
-                        <Link href="/contact">Contact</Link>
+                        {links.map((link) => (
+                            <Link
+                                key={link.href}
+                                href={link.href}
+                                className={`${pathname === link.href
+                                    ? "text-blue-500 border-b-2 border-blue-500"
+                                    : "hover:text-blue-400"
+                                    }`}
+                            >
+                                {link.label}
+                            </Link>
+                        ))}
                     </nav>
 
                     {/* Right section */}
@@ -74,29 +100,65 @@ export default function Header() {
                     </div>
 
                     {/* Mobile Hamburger */}
-                    <button
-                        className="md:hidden text-white dark:text-black text-2xl"
-                        onClick={() => setIsOpen(!isOpen)}
-                    >
-                        ☰
-                    </button>
+                    <div className="flex items-center gap-4 md:hidden">
+                        <Link
+                            href="/cart"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setIsCartOpen(true);
+                            }}
+                            className="relative md:hidden"
+                        >
+                            <ShoppingCart size={26} />
+                            <span className="block absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">
+                                2
+                            </span>
+                        </Link>
+
+                        <button
+                            className="md:hidden text-white dark:text-black text-2xl"
+                            onClick={() => setIsOpen(!isOpen)}
+                        >
+                            ☰
+                        </button>
+                    </div>
+
+
                 </div>
 
                 {/* Mobile Menu */}
                 {isOpen && (
-                    <div className="md:hidden bg-gray-800 dark:bg-gray-200 px-6 pb-6 space-y-3 text-lg">
+                    // <div className="md:hidden bg-gray-800 dark:bg-gray-200 px-6 pb-6 space-y-3 text-lg">
+                    //     {links.map((link) => (
+                    //         <Link
+                    //             key={link.href}
+                    //             href={link.href}
+                    //             className={`block px-2 py-1 rounded ${pathname === link.href
+                    //                     ? "bg-blue-600 text-white font-semibold"
+                    //                     : "hover:bg-gray-700 dark:hover:bg-gray-300"
+                    //                 }`}
+                    //         >
+                    //             {link.label}
+                    //         </Link>
+                    //     ))}
+
+                    //     <Link
+                    //         href="/login"
+                    //         className="block bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-white font-medium"
+                    //     >
+                    //         Login
+                    //     </Link>
+                    // </div>
+                     <div className="md:hidden bg-gray-800 dark:bg-gray-200 px-6 pb-6 space-y-3 text-lg">
                         <Link href="/" className="block">Home</Link>
                         <Link href="/shop" className="block">Shop</Link>
                         <Link href="/about" className="block">About</Link>
                         <Link href="/contact" className="block">Contact</Link>
-                        <Link href="/cart" className="block">Cart</Link>
-                        {/* <button onClick={toggleTheme} className="block">
-                        {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
-                    </button> */}
                         <Link href="/login" className="block bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-white font-medium">Login</Link>
                     </div>
                 )}
-            </header>
+
+            </header >
             <div
                 className={`fixed top-0 right-0 h-full w-80 bg-white shadow-lg transform transition-transform duration-300 ease-in-out z-60
           ${isCartOpen ? "translate-x-0" : "translate-x-full"}`}
@@ -142,13 +204,15 @@ export default function Header() {
             </div>
 
             {/* Overlay */}
-            {isCartOpen && (
-                <div
-                    className="fixed inset-0 bg-white/30 backdrop-blur-sm z-50"
-                    onClick={() => setIsCartOpen(false)}
-                ></div>
+            {
+                isCartOpen && (
+                    <div
+                        className="fixed inset-0 bg-white/30 backdrop-blur-sm z-50"
+                        onClick={() => setIsCartOpen(false)}
+                    ></div>
 
-            )}
+                )
+            }
 
 
 

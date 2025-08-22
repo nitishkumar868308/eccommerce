@@ -18,7 +18,7 @@ export default function Product() {
 
     return (
 
-        <div className="w-full">
+        <div className="w-full mb-10">
             <h2 className="text-3xl font-bold text-center mb-6 relative inline-block mx-auto after:content-[''] after:block after:w-20 after:h-1 after:bg-blue-600 after:mx-auto after:mt-2">
                 Products
             </h2>

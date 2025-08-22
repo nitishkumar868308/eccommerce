@@ -30,15 +30,15 @@ export default function Home() {
         >
           {/* Slide 1 */}
           <SwiperSlide>
-            <div className="relative w-full h-[80vh]">
+            <div className="relative w-full h-[90vh]">
               <Image
-                src="https://picsum.photos/1600/900?random=1"
+                src="/image/banner1.jpg"
                 alt="Slide 1"
                 fill
                 className="object-cover"
                 priority
               />
-              <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-white">
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
                 <h1 className="text-4xl md:text-6xl font-bold">Latest Collection</h1>
                 <p className="mt-4 text-lg md:text-xl">Shop our trendy styles now!</p>
               </div>
@@ -47,14 +47,14 @@ export default function Home() {
 
           {/* Slide 2 */}
           <SwiperSlide>
-            <div className="relative w-full h-[80vh]">
+            <div className="relative w-full h-[90vh]">
               <Image
-                src="https://picsum.photos/1600/900?random=2"
+                src="/image/banner2.jpg"
                 alt="Slide 2"
                 fill
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-white">
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
                 <h1 className="text-4xl md:text-6xl font-bold">Summer Sale</h1>
                 <p className="mt-4 text-lg md:text-xl">Up to 50% Off!</p>
               </div>
@@ -63,14 +63,14 @@ export default function Home() {
 
           {/* Slide 3 */}
           <SwiperSlide>
-            <div className="relative w-full h-[80vh]">
+            <div className="relative w-full h-[90vh]">
               <Image
-                src="https://picsum.photos/1600/900?random=3"
+                src="/image/banner3.jpg"
                 alt="Slide 3"
                 fill
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-white">
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
                 <h1 className="text-4xl md:text-6xl font-bold">New Arrivals</h1>
                 <p className="mt-4 text-lg md:text-xl">Discover the latest trends</p>
               </div>

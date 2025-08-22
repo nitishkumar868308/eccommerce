@@ -1,12 +1,14 @@
-/** @type {import('tailwindcss').Config} */
+// tailwind.config.js
 module.exports = {
-  darkMode: "class", // 👈 force class mode
-  content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        bounce: 'bounce 1s infinite',
+      },
+      transitionDelay: {
+        150: '150ms',
+        300: '300ms',
+      },
+    },
   },
-  plugins: [],
 };
