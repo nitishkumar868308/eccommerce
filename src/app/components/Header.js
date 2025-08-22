@@ -12,6 +12,12 @@ export default function Header() {
     const [isCartOpen, setIsCartOpen] = useState(false);
     const pathname = usePathname();
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const handleLinkClick = () => {
+        setIsMenuOpen(false); // menu close
+    };
+
 
     const links = [
         { href: "/", label: "Home" },
@@ -157,13 +163,24 @@ export default function Header() {
                     //     </Link>
                     // </div>
                     <div className="md:hidden bg-gray-800 dark:bg-gray-200 px-6 pb-6 space-y-3 text-lg">
-                        <Link href="/" className="block">Home</Link>
-                        <Link href="/shop" className="block">Shop</Link>
-                        <Link href="/about" className="block">About</Link>
-                        <Link href="/contact" className="block">Contact</Link>
-                        <Link href="/login" className="block bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-white font-medium">Login</Link>
+                        <Link href="/" className="block" onClick={() => setIsOpen(false)}>Home</Link>
+                        <Link href="/shop" className="block" onClick={() => setIsOpen(false)}>Shop</Link>
+                        <Link href="/about" className="block" onClick={() => setIsOpen(false)}>About</Link>
+                        <Link href="/contact" className="block" onClick={() => setIsOpen(false)}>Contact</Link>
+                        <button
+                            onClick={() => { setIsModalOpen(true); setIsOpen(false); }}
+                            className="block bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-white font-medium"
+                        >
+                            Login
+                        </button>
+
                     </div>
+
                 )}
+                <LoginModal
+                    isOpen={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                />
 
             </header >
             <div
