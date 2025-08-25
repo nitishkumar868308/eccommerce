@@ -27,36 +27,36 @@ export default function Header() {
     ];
 
     // Load theme from localStorage
-    useEffect(() => {
-        if (
-            localStorage.theme === "dark" ||
-            (!("theme" in localStorage) &&
-                window.matchMedia("(prefers-color-scheme: dark)").matches)
-        ) {
-            document.documentElement.classList.add("dark");
-            setTheme("dark");
-        } else {
-            document.documentElement.classList.remove("dark");
-            setTheme("light");
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (
+    //         localStorage.theme === "dark" ||
+    //         (!("theme" in localStorage) &&
+    //             window.matchMedia("(prefers-color-scheme: dark)").matches)
+    //     ) {
+    //         document.documentElement.classList.add("dark");
+    //         setTheme("dark");
+    //     } else {
+    //         document.documentElement.classList.remove("dark");
+    //         setTheme("light");
+    //     }
+    // }, []);
 
-    // Toggle theme
-    const toggleTheme = () => {
-        if (theme === "light") {
-            document.documentElement.classList.add("dark");
-            localStorage.setItem("theme", "dark");
-            setTheme("dark");
-        } else {
-            document.documentElement.classList.remove("dark");
-            localStorage.setItem("theme", "light");
-            setTheme("light");
-        }
-    };
+    // // Toggle theme
+    // const toggleTheme = () => {
+    //     if (theme === "light") {
+    //         document.documentElement.classList.add("dark");
+    //         localStorage.setItem("theme", "dark");
+    //         setTheme("dark");
+    //     } else {
+    //         document.documentElement.classList.remove("dark");
+    //         localStorage.setItem("theme", "light");
+    //         setTheme("light");
+    //     }
+    // };
 
     return (
         <>
-            <header className="fixed top-0 left-0 w-full bg-gray-900 dark:bg-gray-100 text-white dark:text-black shadow-md z-50">
+            <header className="fixed top-0 left-0 w-full bg-white text-black shadow-md z-50">
                 <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
 
                     {/* Logo */}
